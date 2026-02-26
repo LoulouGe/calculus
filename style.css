@@ -219,14 +219,48 @@ body {
 }
 
 #start-btn {
-    padding: 15px 40px;
-    font-size: 1.5rem;
-    font-family: Arial, Helvetica, sans-serif;
-    border-radius: 50px;
-    border: none;
-    background-color: #6A4C93;
-    color: white;
+    width: 90px;
+    height: 90px;
+    font-size: 2.5rem;
+    border-radius: 50%;
+    background: #f0f0f0;
+    border: 2px solid #ddd;
     cursor: pointer;
+    transition: transform 0.2s;
+    line-height: 1;
+}
+
+#start-btn:active {
+    transform: scale(0.9);
+}
+
+/* ===== Celebration confetti ===== */
+
+.confetti {
+    position: fixed;
+    top: -50px;
+    font-size: 2rem;
+    z-index: 100;
+    pointer-events: none;
+    animation: confettiFall 2s ease-in forwards;
+}
+
+@keyframes confettiFall {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+/* ===== Dancing unicorn ===== */
+
+.dancing-unicorn {
+    font-size: 5rem;
+    animation: unicornDance 0.5s ease-in-out infinite alternate;
+    display: inline-block;
+}
+
+@keyframes unicornDance {
+    0%   { transform: scale(1) rotate(-10deg); }
+    100% { transform: scale(1.2) rotate(10deg); }
 }
 
 /* ===== Game header with back button ===== */
@@ -247,13 +281,32 @@ body {
     cursor: pointer;
 }
 
+
 #next-btn {
     margin-top: 20px;
-    padding: 15px 30px;
-    font-size: 1.5rem;
-    border-radius: 50px;
-    border: none;
-    background-color: #6A4C93;
+    width: 170px;
+    height: 80px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    border-radius: 60px;
+    background: linear-gradient(135deg, #FF69B4, #FF85C8);
     color: white;
+    border: 3px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
     cursor: pointer;
+    transition: transform 0.2s;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(10px); }
+}
+
+#next-btn:active {
+    transform: scale(0.9);
 }
