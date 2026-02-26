@@ -1,8 +1,18 @@
 var score = 0;
 var correctAnswer = 0;
 var currentOperation = 'add';
+var madeError = false;
+var totalStars = parseInt(localStorage.getItem('totalStars')) || 0;
+var questionNumber = 0;
+var TOTAL_QUESTIONS = 10;
 
 var SYMBOLS = { add: '+', sub: '-', mul: '×', div: '÷' };
+
+// Show total stars on menu screen
+function updateTotalStars() {
+    document.getElementById('total-stars').innerText = '⭐ Total : ' + totalStars;
+}
+updateTotalStars();
 
 // Select one operation (single choice)
 function selectOperation(btn, op) {
@@ -19,22 +29,39 @@ function selectOperation(btn, op) {
 // Start the game
 function startGame() {
     score = 0;
+    questionNumber = 0;
     document.getElementById('score').innerText = '⭐ 0';
     document.getElementById('menu-screen').style.display = 'none';
     document.getElementById('game-screen').style.display = 'block';
+    document.getElementById('result-screen').style.display = 'none';
     generateGame();
 }
 
 // Back to menu
 function backToMenu() {
     document.getElementById('game-screen').style.display = 'none';
+    document.getElementById('result-screen').style.display = 'none';
     document.getElementById('menu-screen').style.display = 'block';
+    updateTotalStars();
+}
+
+// Show end-of-series result screen
+function showResult() {
+    document.getElementById('game-screen').style.display = 'none';
+    document.getElementById('result-screen').style.display = 'block';
+    document.getElementById('result-score').innerText = score + ' / ' + TOTAL_QUESTIONS;
+    if (score === TOTAL_QUESTIONS) {
+        showCelebration();
+    }
 }
 
 // Generate a new question
 function generateGame() {
+    questionNumber++;
+    document.getElementById('question-count').innerText = questionNumber + ' / ' + TOTAL_QUESTIONS;
     document.getElementById('next-btn').style.display = 'none';
     document.getElementById('answer').innerText = '?';
+    madeError = false;
 
     var n1, n2;
 
@@ -128,12 +155,22 @@ function showCelebration() {
 function checkAnswer(selected, btn) {
     if (selected === correctAnswer) {
         document.getElementById('answer').innerText = correctAnswer;
-        score++;
-        document.getElementById('score').innerText = '⭐ ' + score;
-        document.getElementById('next-btn').style.display = 'block';
+        if (!madeError) {
+            score++;
+            totalStars++;
+            localStorage.setItem('totalStars', totalStars);
+            document.getElementById('score').innerText = '⭐ ' + score;
+            showCelebration();
+        }
         document.getElementById('options').innerHTML = '<img src="unicorn.png" class="dancing-unicorn" alt="licorne">';
-        showCelebration();
+        if (questionNumber >= TOTAL_QUESTIONS) {
+            // Last question: show result after a short delay
+            setTimeout(showResult, 1500);
+        } else {
+            document.getElementById('next-btn').style.display = 'block';
+        }
     } else {
+        madeError = true;
         btn.disabled = true;
         btn.classList.add('wrong');
         btn.innerText = '❌ ' + selected;
