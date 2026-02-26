@@ -220,6 +220,12 @@ body {
     background-color: #FFF0F5;
 }
 
+#total-stars {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    color: #999;
+}
+
 #start-btn {
     width: 90px;
     height: 90px;

@@ -2,8 +2,15 @@ var score = 0;
 var correctAnswer = 0;
 var currentOperation = 'add';
 var madeError = false;
+var totalStars = parseInt(localStorage.getItem('totalStars')) || 0;
 
 var SYMBOLS = { add: '+', sub: '-', mul: '×', div: '÷' };
+
+// Show total stars on menu screen
+function updateTotalStars() {
+    document.getElementById('total-stars').innerText = '⭐ Total : ' + totalStars;
+}
+updateTotalStars();
 
 // Select one operation (single choice)
 function selectOperation(btn, op) {
@@ -30,6 +37,7 @@ function startGame() {
 function backToMenu() {
     document.getElementById('game-screen').style.display = 'none';
     document.getElementById('menu-screen').style.display = 'block';
+    updateTotalStars();
 }
 
 // Generate a new question
@@ -132,6 +140,8 @@ function checkAnswer(selected, btn) {
         document.getElementById('answer').innerText = correctAnswer;
         if (!madeError) {
             score++;
+            totalStars++;
+            localStorage.setItem('totalStars', totalStars);
             document.getElementById('score').innerText = '⭐ ' + score;
             showCelebration();
         }
