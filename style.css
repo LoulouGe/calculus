@@ -253,9 +253,12 @@ body {
 /* ===== Dancing unicorn ===== */
 
 .dancing-unicorn {
-    font-size: 5rem;
+    width: 120px;
+    height: auto;
     animation: unicornDance 0.5s ease-in-out infinite alternate;
-    display: inline-block;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
 }
 
 @keyframes unicornDance {
