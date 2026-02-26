@@ -71,10 +71,18 @@
         <p id="total-stars"></p>
     </div>
 
+    <!-- Result screen -->
+    <div class="game-container hidden" id="result-screen">
+        <h1>Bravo !</h1>
+        <p class="result-text">⭐ <span id="result-score"></span></p>
+        <button class="home-btn" onclick="backToMenu()">🏠 Retour a la maison</button>
+    </div>
+
     <!-- Game screen -->
     <div class="game-container hidden" id="game-screen">
         <div class="header">
             <span id="score">⭐ 0</span>
+            <span id="question-count"></span>
             <button id="back-btn" onclick="backToMenu()">🏠</button>
         </div>
 
