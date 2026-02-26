@@ -131,7 +131,7 @@ function checkAnswer(selected, btn) {
         score++;
         document.getElementById('score').innerText = '⭐ ' + score;
         document.getElementById('next-btn').style.display = 'block';
-        document.getElementById('options').innerHTML = '<span class="dancing-unicorn">🦄</span>';
+        document.getElementById('options').innerHTML = '<img src="unicorn.png" class="dancing-unicorn" alt="licorne">';
         showCelebration();
     } else {
         btn.disabled = true;
