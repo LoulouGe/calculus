@@ -8,7 +8,7 @@ Créé par Louise pour son petit cousin.
 ## Stack
 
 - HTML, CSS, JavaScript — pas de framework, pas de bundler
-- Hébergé sur GitHub Pages
+- Hébergé sur GitHub Pages : https://loulouge.github.io/calculus/
 
 ## Langues
 

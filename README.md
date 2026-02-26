@@ -2,9 +2,11 @@
 
 Site web pour s'entraîner au calcul mental : addition, soustraction, multiplication et division.
 
-## Comment utiliser
+## Jouer
 
-Ouvre `index.html` dans ton navigateur, choisis une opération et commence à t'entraîner !
+👉 **https://loulouge.github.io/calculus/**
+
+Ou ouvre `index.html` dans ton navigateur pour jouer en local.
 
 ## Fichiers
 
@@ -16,4 +18,4 @@ Ouvre `index.html` dans ton navigateur, choisis une opération et commence à t'
 
 ## Déploiement
 
-Le site est hébergé avec [GitHub Pages](https://pages.github.com/).
+Le site est hébergé avec [GitHub Pages](https://pages.github.com/) à l'adresse https://loulouge.github.io/calculus/.

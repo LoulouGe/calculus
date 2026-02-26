@@ -103,6 +103,27 @@ function generateGame() {
     }
 }
 
+// Show confetti rain + dancing unicorn
+function showCelebration() {
+    var emojis = ['🎉', '⭐', '🦄', '🌟', '✨'];
+    for (var i = 0; i < 30; i++) {
+        var el = document.createElement('span');
+        el.className = 'confetti';
+        el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+        el.style.left = Math.random() * 100 + 'vw';
+        el.style.animationDelay = Math.random() * 0.8 + 's';
+        el.style.fontSize = (1.5 + Math.random() * 1.5) + 'rem';
+        document.body.appendChild(el);
+    }
+    // Clean up confetti after animation
+    setTimeout(function () {
+        var bits = document.querySelectorAll('.confetti');
+        for (var j = 0; j < bits.length; j++) {
+            bits[j].remove();
+        }
+    }, 3000);
+}
+
 // Check the selected answer
 function checkAnswer(selected, btn) {
     if (selected === correctAnswer) {
@@ -110,7 +131,8 @@ function checkAnswer(selected, btn) {
         score++;
         document.getElementById('score').innerText = '⭐ ' + score;
         document.getElementById('next-btn').style.display = 'block';
-        document.getElementById('options').innerHTML = '<h1>🎉 BRAVO !</h1>';
+        document.getElementById('options').innerHTML = '<span class="dancing-unicorn">🦄</span>';
+        showCelebration();
     } else {
         btn.disabled = true;
         btn.classList.add('wrong');
