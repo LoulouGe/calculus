@@ -8,9 +8,73 @@
 </head>
 <body>
 
-    <div class="game-container">
+    <!-- Unicorns and stars floating in the background -->
+    <div class="unicorns">
+        <span class="unicorn">🦄</span>
+        <span class="unicorn">🦄</span>
+        <span class="unicorn">🦄</span>
+        <span class="unicorn">🦄</span>
+        <span class="unicorn">🦄</span>
+        <span class="unicorn">🦄</span>
+        <span class="unicorn">🦄</span>
+        <span class="unicorn">🦄</span>
+        <span class="unicorn">🦄</span>
+        <span class="unicorn">🦄</span>
+        <span class="unicorn">🦄</span>
+        <span class="unicorn">🦄</span>
+        <span class="unicorn">🦄</span>
+        <span class="unicorn">🦄</span>
+        <span class="unicorn">🦄</span>
+        <span class="unicorn">🦄</span>
+        <span class="unicorn">🦄</span>
+        <span class="unicorn">🦄</span>
+        <span class="unicorn star">⭐</span>
+        <span class="unicorn star">⭐</span>
+        <span class="unicorn star">⭐</span>
+        <span class="unicorn star">⭐</span>
+        <span class="unicorn star">⭐</span>
+        <span class="unicorn star">⭐</span>
+        <span class="unicorn star">⭐</span>
+        <span class="unicorn star">⭐</span>
+    </div>
+
+    <!-- Sparkles / glitter -->
+    <div class="sparkles">
+        <span class="sparkle"></span>
+        <span class="sparkle"></span>
+        <span class="sparkle"></span>
+        <span class="sparkle"></span>
+        <span class="sparkle"></span>
+        <span class="sparkle"></span>
+        <span class="sparkle"></span>
+        <span class="sparkle"></span>
+        <span class="sparkle"></span>
+        <span class="sparkle"></span>
+        <span class="sparkle"></span>
+        <span class="sparkle"></span>
+        <span class="sparkle"></span>
+        <span class="sparkle"></span>
+        <span class="sparkle"></span>
+    </div>
+
+    <!-- Operation selection screen -->
+    <div class="game-container" id="menu-screen">
+        <h1>Maths Rigolotes 🌈</h1>
+        <p class="menu-subtitle">Choisis ton opération !</p>
+        <div class="menu-options">
+            <button class="menu-btn selected" onclick="selectOperation(this, 'add')">➕ Addition</button>
+            <button class="menu-btn" onclick="selectOperation(this, 'sub')">➖ Soustraction</button>
+            <button class="menu-btn" onclick="selectOperation(this, 'mul')">✖️ Multiplication</button>
+            <button class="menu-btn" onclick="selectOperation(this, 'div')">➗ Division</button>
+        </div>
+        <button id="start-btn" onclick="startGame()">C'est parti ! 🚀</button>
+    </div>
+
+    <!-- Game screen -->
+    <div class="game-container hidden" id="game-screen">
         <div class="header">
             <span id="score">⭐ 0</span>
+            <button id="back-btn" onclick="backToMenu()">🏠</button>
         </div>
 
         <div class="question-box">
@@ -21,10 +85,9 @@
             <span id="answer">?</span>
         </div>
 
-        <div class="options" id="options">
-            </div>
+        <div class="options" id="options"></div>
 
-        <button id="next-btn" class="hidden">➡️ Suivant</button>
+        <button id="next-btn" class="hidden" onclick="generateGame()">➡️ Suivant</button>
     </div>
 
     <script src="script.js"></script>
