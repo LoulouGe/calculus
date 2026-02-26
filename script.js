@@ -1,6 +1,7 @@
 var score = 0;
 var correctAnswer = 0;
 var currentOperation = 'add';
+var madeError = false;
 
 var SYMBOLS = { add: '+', sub: '-', mul: '×', div: '÷' };
 
@@ -35,6 +36,7 @@ function backToMenu() {
 function generateGame() {
     document.getElementById('next-btn').style.display = 'none';
     document.getElementById('answer').innerText = '?';
+    madeError = false;
 
     var n1, n2;
 
@@ -128,12 +130,15 @@ function showCelebration() {
 function checkAnswer(selected, btn) {
     if (selected === correctAnswer) {
         document.getElementById('answer').innerText = correctAnswer;
-        score++;
-        document.getElementById('score').innerText = '⭐ ' + score;
+        if (!madeError) {
+            score++;
+            document.getElementById('score').innerText = '⭐ ' + score;
+            showCelebration();
+        }
         document.getElementById('next-btn').style.display = 'block';
         document.getElementById('options').innerHTML = '<img src="unicorn.png" class="dancing-unicorn" alt="licorne">';
-        showCelebration();
     } else {
+        madeError = true;
         btn.disabled = true;
         btn.classList.add('wrong');
         btn.innerText = '❌ ' + selected;
