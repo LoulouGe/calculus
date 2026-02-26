@@ -60,6 +60,26 @@ function generateGame() {
     document.getElementById('num2').innerText = n2;
     document.getElementById('operator').innerText = SYMBOLS[currentOperation];
 
+    // Show a hint for multiplication and division
+    var hint = document.getElementById('hint');
+    if (currentOperation === 'mul') {
+        // 5 × 3 => "5 + 5 + 5"
+        var parts = [];
+        for (var h = 0; h < n2; h++) {
+            parts.push(n1);
+        }
+        hint.innerText = '💡 ' + parts.join(' + ');
+    } else if (currentOperation === 'div') {
+        // 12 ÷ 3 => "3 + 3 + 3 + 3 = 12"
+        var parts = [];
+        for (var h = 0; h < correctAnswer; h++) {
+            parts.push(n2);
+        }
+        hint.innerText = '💡 ' + parts.join(' + ') + ' = ' + n1;
+    } else {
+        hint.innerText = '';
+    }
+
     // Generate 4 answer choices
     var choices = [correctAnswer];
     while (choices.length < 4) {
