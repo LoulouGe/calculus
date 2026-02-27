@@ -220,6 +220,33 @@ body {
     background-color: #FFF0F5;
 }
 
+.level-options {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.level-btn {
+    padding: 12px 18px;
+    font-size: 1.2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 20px;
+    border: 3px solid #ddd;
+    background: white;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s, background-color 0.2s;
+}
+
+.level-btn:active {
+    transform: scale(0.95);
+}
+
+.level-btn.selected {
+    border-color: #FF69B4;
+    background-color: #FFF0F5;
+}
+
 #total-stars {
     margin-top: 15px;
     font-size: 1.2rem;
@@ -382,6 +409,11 @@ body {
 
     .menu-btn {
         padding: 12px 8px;
+        font-size: 1rem;
+    }
+
+    .level-btn {
+        padding: 10px 14px;
         font-size: 1rem;
     }
 

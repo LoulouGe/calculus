@@ -67,6 +67,12 @@
             <button class="menu-btn" onclick="selectOperation(this, 'mul')">✖️ Multiplication</button>
             <button class="menu-btn" onclick="selectOperation(this, 'div')">➗ Division</button>
         </div>
+        <p class="menu-subtitle">Choisis ton niveau !</p>
+        <div class="level-options">
+            <button class="level-btn selected" onclick="selectLevel(this, 1)">⭐</button>
+            <button class="level-btn" onclick="selectLevel(this, 2)">⭐⭐</button>
+            <button class="level-btn" onclick="selectLevel(this, 3)">⭐⭐⭐</button>
+        </div>
         <button id="start-btn" onclick="startGame()">▶</button>
         <p id="total-stars"></p>
     </div>
