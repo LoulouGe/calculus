@@ -1,6 +1,7 @@
 var score = 0;
 var correctAnswer = 0;
 var currentOperation = 'add';
+var currentLevel = 1;
 var madeError = false;
 var totalStars = parseInt(localStorage.getItem('totalStars')) || 0;
 var questionNumber = 0;
@@ -26,6 +27,16 @@ function selectOperation(btn, op) {
     currentOperation = op;
 }
 
+// Select level (single choice)
+function selectLevel(btn, level) {
+    var allBtns = document.querySelectorAll('.level-btn');
+    for (var i = 0; i < allBtns.length; i++) {
+        allBtns[i].classList.remove('selected');
+    }
+    btn.classList.add('selected');
+    currentLevel = level;
+}
+
 // Start the game
 function startGame() {
     score = 0;
@@ -49,8 +60,8 @@ function backToMenu() {
 function showResult() {
     document.getElementById('game-screen').style.display = 'none';
     document.getElementById('result-screen').style.display = 'block';
-    document.getElementById('result-score').innerText = score + ' / ' + TOTAL_QUESTIONS;
-    if (score === TOTAL_QUESTIONS) {
+    document.getElementById('result-score').innerText = score + ' / ' + (TOTAL_QUESTIONS * currentLevel);
+    if (score === TOTAL_QUESTIONS * currentLevel) {
         showCelebration();
     }
 }
@@ -65,21 +76,31 @@ function generateGame() {
 
     var n1, n2;
 
+    // Helper: random integer between min and max (inclusive)
+    function rand(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
     if (currentOperation === 'add') {
-        n1 = Math.floor(Math.random() * 10) + 1;
-        n2 = Math.floor(Math.random() * 10) + 1;
+        if (currentLevel === 1)      { n1 = rand(1, 10);  n2 = rand(1, 10); }
+        else if (currentLevel === 2) { n1 = rand(10, 50);  n2 = rand(10, 50); }
+        else                         { n1 = rand(50, 200); n2 = rand(50, 200); }
         correctAnswer = n1 + n2;
     } else if (currentOperation === 'sub') {
-        n1 = Math.floor(Math.random() * 10) + 1;
-        n2 = Math.floor(Math.random() * n1) + 1;
+        if (currentLevel === 1)      { n1 = rand(3, 10); }
+        else if (currentLevel === 2) { n1 = rand(11, 50); }
+        else                         { n1 = rand(51, 200); }
+        n2 = rand(1, n1 - 1);
         correctAnswer = n1 - n2;
     } else if (currentOperation === 'mul') {
-        n1 = Math.floor(Math.random() * 10) + 1;
-        n2 = Math.floor(Math.random() * 10) + 1;
+        if (currentLevel === 1)      { n1 = rand(2, 5);  n2 = rand(2, 5); }
+        else if (currentLevel === 2) { n1 = rand(2, 10); n2 = rand(2, 10); }
+        else                         { n1 = rand(2, 12); n2 = rand(2, 20); }
         correctAnswer = n1 * n2;
     } else if (currentOperation === 'div') {
-        n2 = Math.floor(Math.random() * 9) + 2;
-        correctAnswer = Math.floor(Math.random() * 10) + 1;
+        if (currentLevel === 1)      { n2 = rand(2, 5);  correctAnswer = rand(1, 5); }
+        else if (currentLevel === 2) { n2 = rand(2, 10); correctAnswer = rand(1, 10); }
+        else                         { n2 = rand(2, 12); correctAnswer = rand(2, 20); }
         n1 = n2 * correctAnswer;
     }
 
@@ -87,16 +108,16 @@ function generateGame() {
     document.getElementById('num2').innerText = n2;
     document.getElementById('operator').innerText = SYMBOLS[currentOperation];
 
-    // Show a hint for multiplication and division
+    // Show a hint for multiplication and division (levels 1 & 2 only)
     var hint = document.getElementById('hint');
-    if (currentOperation === 'mul') {
+    if (currentLevel <= 2 && currentOperation === 'mul') {
         // 5 × 3 => "5 + 5 + 5"
         var parts = [];
         for (var h = 0; h < n2; h++) {
             parts.push(n1);
         }
         hint.innerText = '💡 ' + parts.join(' + ');
-    } else if (currentOperation === 'div') {
+    } else if (currentLevel <= 2 && currentOperation === 'div') {
         // 12 ÷ 3 => "3 + 3 + 3 + 3 = 12"
         var parts = [];
         for (var h = 0; h < correctAnswer; h++) {
@@ -108,11 +129,12 @@ function generateGame() {
     }
 
     // Generate 4 answer choices
+    var maxOffset = currentLevel === 1 ? 5 : currentLevel === 2 ? 10 : 20;
     var choices = [correctAnswer];
     while (choices.length < 4) {
-        var offset = Math.floor(Math.random() * 10) + 1;
+        var offset = Math.floor(Math.random() * maxOffset) + 1;
         var wrong = correctAnswer + (Math.random() < 0.5 ? offset : -offset);
-        if (wrong < 0) wrong = Math.floor(Math.random() * 10) + 1;
+        if (wrong < 1) wrong = correctAnswer + Math.floor(Math.random() * maxOffset) + 1;
         if (choices.indexOf(wrong) === -1) choices.push(wrong);
     }
     choices.sort(function () { return Math.random() - 0.5; });
@@ -156,8 +178,8 @@ function checkAnswer(selected, btn) {
     if (selected === correctAnswer) {
         document.getElementById('answer').innerText = correctAnswer;
         if (!madeError) {
-            score++;
-            totalStars++;
+            score += currentLevel;
+            totalStars += currentLevel;
             localStorage.setItem('totalStars', totalStars);
             document.getElementById('score').innerText = '⭐ ' + score;
             showCelebration();
