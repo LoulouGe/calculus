@@ -22,7 +22,7 @@ L'application est maintenant une **Progressive Web App** :
 
 - `manifest.json` décrit le nom, les couleurs et l'icône.
 - `service-worker.js` met en cache les fichiers pour fonctionner hors ligne.
-- L'icône utilisée (et qui apparaît si tu ajoutes le site au Home Screen ou au Dock sur macOS) est `assets/IMG_3723.jpg`.
+- L'icône utilisée (et qui apparaît si tu ajoutes le site au Home Screen ou au Dock sur macOS) est `assets/IMG_3723.png`.
 
 ## Déploiement
 
