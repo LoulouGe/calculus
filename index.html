@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Maths Rigolotes 🌈</title>
     <link rel="stylesheet" href="style.css">
+    <!-- PWA manifest and icons -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="assets/IMG_3723.jpg">
+    <!-- Apple touch icon for iOS/macOS when added to home screen or dock -->
+    <link rel="apple-touch-icon" href="assets/IMG_3723.jpg">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#ff69b4">
 </head>
 <body>
 
@@ -107,5 +115,14 @@
         <button id="next-btn" class="hidden" onclick="generateGame()">&rarr;Suivant</button>
     </div>
     <script src="script.js"></script>
+
+    <!-- register service worker for PWA -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(() => console.log('Service worker registered'))
+          .catch(err => console.error('SW registration failed:', err));
+      }
+    </script>
 </body>
 </html>
