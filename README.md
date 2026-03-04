@@ -24,6 +24,8 @@ L'application est maintenant une **Progressive Web App** :
 - `service-worker.js` met en cache les fichiers pour fonctionner hors ligne.
 - L'icône utilisée (et qui apparaît si tu ajoutes le site au Home Screen ou au Dock sur macOS) est `assets/IMG_3723.png`.
 
+> **Remplacer l'icône:** écrase `assets/IMG_3723.png` avec ta nouvelle image (celle fournie) et recharge la page. Si l'ancienne icône reste affichée, vide le cache ou incrémente le `?v=` dans les URLs.
+
 ## Déploiement
 
 Le site est hébergé avec [GitHub Pages](https://pages.github.com/) à l'adresse https://loulouge.github.io/calculus/.
