@@ -1,11 +1,11 @@
-const CACHE_NAME = 'calcul-pwa-v1';
+const CACHE_NAME = 'calcul-pwa-v2';
 const urlsToCache = [
   './',
   './index.html',
   './style.css',
   './script.js',
-  './unicorn.png',
-  './assets/IMG_3723.png'
+  './unicorn.png'
+  // Note: Removed './assets/IMG_3723.png' to allow icon updates
 ];
 
 self.addEventListener('install', event => {
